@@ -1,0 +1,24 @@
+<!-- library/templates/library/edit_book.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Book</title>
+</head>
+<body>
+    <h1>Edit Book (ID: {{ book_id }})</h1>
+    <form method="post">
+        {% csrf_token %}
+        <p>Title: <input type="text" name="title" value="{{ book.title }}" required></p>
+        <p>Author: <input type="text" name="author_name" value="{{ book.author_name }}" required></p>
+        <p>Genre:
+            <select name="genre">
+                {% for g in genres %}
+                    <option value="{{ g }}" {% if book.genre == g %}selected{% endif %}>{{ g }}</option>
+                {% endfor %}
+            </select>
+        </p>
+        <button type="submit">Save Changes</button>
+        <a href="{% url 'index' %}">Back to Home</a>
+    </form>
+</body>
+</html>

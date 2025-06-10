@@ -1,0 +1,21 @@
+<!-- library/templates/library/add_book.html -->
+{% extends "library/base.html" %}
+
+{% block content %}
+<h1>Add a New Book</h1>
+<form method="post">
+    {% csrf_token %}
+    <p>ID (numbers only): <input type="text" name="id" required></p>
+    <p>Title: <input type="text" name="title" required></p>
+    <p>Author: <input type="text" name="author_name" required></p>
+    <p>Genre:
+        <select name="genre">
+            {% for g in genres %}
+                <option value="{{ g }}">{{ g }}</option>
+            {% endfor %}
+        </select>
+    </p>
+    <button type="submit">Add Book</button>
+    <a href="{% url 'index' %}">Back to Home</a>
+</form>
+{% endblock %}
